@@ -85,8 +85,5 @@ Acquire::http::Proxy "socks5h://127.0.0.1:10808/";
 Acquire::https::Proxy "socks5h://127.0.0.1:10808/";
 EOF
 
-echo "📥 Installing Hiddify Agent via proxy..."
-bash -c "$(curl -sL https://raw.githubusercontent.com/hiddify/hiddify-config/main/install.sh)"
-
 echo "✅ Setup complete!"
 echo "🔁 Please reboot or re-login to apply global proxy settings."
