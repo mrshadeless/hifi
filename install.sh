@@ -80,3 +80,4 @@ EOF
 
 echo "✅ Setup complete!"
 echo "🔁 Please reboot or re-login to apply global proxy settings."
+curl --proxy socks5h://127.0.0.1:10808 https://ipinfo.io
