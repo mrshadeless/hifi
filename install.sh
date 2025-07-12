@@ -72,13 +72,6 @@ echo "🌐 Setting up proxy environment for current session..."
 export http_proxy="socks5h://127.0.0.1:10808"
 export https_proxy="socks5h://127.0.0.1:10808"
 
-echo "🌍 Persisting proxy environment globally..."
-sudo tee /etc/profile.d/proxy.sh >/dev/null <<EOF
-export http_proxy="socks5h://127.0.0.1:10808"
-export https_proxy="socks5h://127.0.0.1:10808"
-EOF
-sudo chmod +x /etc/profile.d/proxy.sh
-
 echo "📦 Configuring apt to use proxy..."
 sudo tee /etc/apt/apt.conf.d/99proxy >/dev/null <<EOF
 Acquire::http::Proxy "socks5h://127.0.0.1:10808/";
