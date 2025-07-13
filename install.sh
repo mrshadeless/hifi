@@ -30,7 +30,7 @@ sudo tee /usr/local/etc/xray/config.json >/dev/null <<EOF
       "settings": {
         "vnext": [
           {
-            "address": "FRanCe.PiAzDAgh.cOm",
+            "address": "fr.nevisatech.net",
             "port": 443,
             "users": [
               {
@@ -45,13 +45,13 @@ sudo tee /usr/local/etc/xray/config.json >/dev/null <<EOF
         "network": "ws",
         "security": "tls",
         "tlsSettings": {
-          "serverName": "frANce.pIaZdAgh.cOM",
+          "serverName": "fr.nevisatech.net",
           "alpn": ["h2"]
         },
         "wsSettings": {
           "path": "/TYeJHnpeVa7aVfoYPJnbZ9e",
           "headers": {
-            "Host": "france.piazdagh.com"
+            "Host": "fr.nevisatech.net"
           }
         }
       },
