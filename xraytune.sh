@@ -85,7 +85,8 @@ Requires=xray.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/tun2socks -device tun0 -proxy socks5://127.0.0.1:10808 -interface eth0 -udpgw-remote 127.0.0.1:7300
+#ExecStart=/usr/local/bin/tun2socks -device tun0 -proxy socks5://127.0.0.1:10808 -interface eth0 -udpgw-remote 127.0.0.1:7300
+ExecStart=/usr/local/bin/tun2socks -device tun0 -proxy socks5://127.0.0.1:10808 -loglevel info -tun-post-up "ip link set tun0 up"
 Restart=on-failure
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW
