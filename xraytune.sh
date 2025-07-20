@@ -17,8 +17,8 @@ cd /opt/tun2socks
 TUN2SOCKS_VERSION=$(curl -s https://api.github.com/repos/xjasonlyu/tun2socks/releases/latest | grep tag_name | cut -d '"' -f 4)
 wget -q "https://github.com/xjasonlyu/tun2socks/releases/download/${TUN2SOCKS_VERSION}/tun2socks-linux-amd64.zip"
 unzip -o tun2socks-linux-amd64.zip
-chmod +x tun2socks
-sudo mv tun2socks /usr/local/bin/
+chmod +x tun2socks-linux-amd64
+sudo mv tun2socks-linux-amd64 /usr/local/bin/tun2socks
 
 echo "⚙️ Writing Xray config.json..."
 sudo tee /usr/local/etc/xray/config.json >/dev/null <<EOF
