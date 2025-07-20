@@ -84,26 +84,26 @@ After=network.target xray.service
 Requires=xray.service
 
 [Service]
-Type=simple
-#ExecStart=/usr/local/bin/tun2socks -device tun0 -proxy socks5://127.0.0.1:10808 -interface eth0 -udpgw-remote 127.0.0.1:7300
 ExecStart=/usr/local/bin/tun2socks -device tun0 -proxy socks5://127.0.0.1:10808 -loglevel info -tun-post-up "ip link set tun0 up"
-Restart=on-failure
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW
-ExecStartPre=/sbin/ip tuntap add dev tun0 mode tun
-ExecStartPre=/sbin/ip addr add 10.0.0.1/24 dev tun0
-ExecStartPre=/sbin/ip link set tun0 up
+Restart=always
+RestartSec=3
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 echo "📡 Configuring IP routes through tun0..."
-sudo ip tuntap add dev tun0 mode tun || true
-sudo ip addr add 10.0.0.1/24 dev tun0 || true
-sudo ip link set tun0 up || true
-sudo ip route add default dev tun0 table 100 || true
-sudo ip rule add from 10.0.0.2 lookup 100 || true
+#sudo ip tuntap add dev tun0 mode tun || true
+#sudo ip addr add 10.0.0.1/24 dev tun0 || true
+#sudo ip link set tun0 up || true
+#sudo ip route add default dev tun0 table 100 || true
+#sudo ip rule add from 10.0.0.2 lookup 100 || true
 
 echo "▶️ Enabling and starting services..."
 sudo systemctl daemon-reexec
@@ -129,5 +129,5 @@ sudo tee /etc/apt/apt.conf.d/99proxy >/dev/null <<EOF
 Acquire::http::Proxy "socks5h://127.0.0.1:10808/";
 Acquire::https::Proxy "socks5h://127.0.0.1:10808/";
 EOF
-
+curl --proxy socks5h://127.0.0.1:10808 https://ipinfo.io
 echo "✅ Installation complete. Xray and tun2socks are running."
